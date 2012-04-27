@@ -1,0 +1,494 @@
+<events>
+  <event
+     id="1"
+     name="number of connection failures"
+     desc="Over 100 connections have terminated abnormally. "
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_wait_timeout"
+     solution="This alert has found a large number of aborted connections to the database. A common cause of this is improperly closed connections from the application or locked tables causing subsequent connections to abort due to the connection timeout being reached. This alert recommends auditing your code for connections being properly closed or queries being tested in a staging environment to watch for locked tables."
+     category="Connection Status"
+     level="2"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="3"
+     name="binary logging not enabled"
+     desc="Binary log not enabled. Transaction logging not available for point in time recovery. "
+     links="http://dev.mysql.com/doc/refman/5.0/en/binary-log.html"
+     solution="Enable the binary log by adding the entry 'log-bin' in mysql configuration file."
+     category="Logging"
+     level="2"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="4"
+     name="sync_binlog is enabled"
+     desc="Binary log is being synced to disk at each write. Please disable for fastest performance (no support for XA)."
+     links="http://dev.mysql.com/doc/refman/5.0/en/replication-options-binary-log.html#option_mysqld_sync_binlog"
+     solution="Disable sync_binlog by adding the entry 'sync_binlog=0' in mysql configuration file."
+     category="Logging"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="5"
+     name="max_connections to max_used_connections ratio not optimal."
+     desc="Server connection usage ratio needs to be optimized."
+     links="http://dev.mysql.com/doc/refman/5.0/en/too-many-connections.html
+ http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_max_connections"
+     solution="Change the value of max_connections to accomplish 85% max utilization. Keep in mind that increasing the number of connections will increase the amount of RAM used by per-thread-buffers.
+		     "
+     category="Connection Status"
+     level="0"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="6"
+     name="query cache size too small"
+     desc="The query cache is too small for the majority of queries that could be cached."
+     links="http://dev.mysql.com/doc/refman/5.0/en/query-cache-configuration.html
+http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_query_cache_size"
+     solution="Increase query_cache_size to solve the issue. "
+     category="Caches"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="7"
+     name="query cache size too large"
+     desc="The query_cache_size value is set too high."
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_query_cache_size"
+     solution="Decrease the size of the query_cache. This can be set at runtime as well as the server configuration file. "
+     category="Caches"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="8"
+     name="memory usage over 85%"
+     desc="Total memory usage of MySQL has exceeded over 85 % of available memory."
+     links="http://dev.mysql.com/doc/refman/5.0/en/memory-use.html"
+     solution="Increase the amount of RAM in the server or decrease per-thread and global memory buffers."
+     category="General Memory"
+     level="0"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="9"
+     name="table scans excessive"
+     desc="Over abundance of table scans, leading to increased resource utilization. "
+     links="http://dev.mysql.com/doc/refman/5.0/en/how-to-avoid-table-scan.html"
+     solution="Add proper indexing to the tables to avoid full table scans, or increase read_buffer_size."
+     category="Indexing"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="10"
+     name="tmp table to disk ratio too high"
+     desc="Ratio of created_tmp_disk_tables to created_tmp_tables is too high. Typically relates to excessive IO usage. "
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_tmp_table_size"
+     solution="Increase the value of the variable tmp_table_size."
+     category="Operating System"
+     level="0"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="11"
+     name="innodb buffer too small"
+     desc="The InnoDB buffer size is too small for caching data and indexes into RAM. "
+     links="http://dev.mysql.com/doc/refman/5.0/en/innodb-parameters.html#option_mysqld_innodb_buffer_pool_size"
+     solution="Increase the value for innodb_buffer_pool size by adding the entry in my.cnf as  innodb_buffer_pool_size=[desired value] and restart the MySQL for changes to affect."
+     category="Innodb"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="12"
+     name="innodb buffer too large"
+     desc="The InnoDB buffer size is set to too high, we can make use this memory elsewhere for better performance."
+     links="http://dev.mysql.com/doc/refman/5.0/en/innodb-parameters.html#option_mysqld_innodb_buffer_pool_size"
+     solution="Decrease the value of Innodb_buffer_pool size by adding the entry in my.cnf as  Innodb_buffer_pool_size=[desired value] and restart the MySQL for changes to affect."
+     category="Innodb"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="13"
+     name="key buffer too large"
+     desc="Key_buffer_size for caching MyISAM indexes is set too large, the ratio of key blocks used to key blocks total is low."
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_key_buffer_size"
+     solution="Decrease the value of key_buffer_size by adding the entry in my.cnf as  key_buffer_size=[desired value] , since it is a dynamic variable the changes can be done in runtime."
+     category="Connection Buffers"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="14"
+     name="key buffer too small"
+     desc="Key Buffer value is too small to cache the MyISAM indexes."
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_key_buffer_size"
+     solution="Increase the value of key_buffer_size by adding the entry in my.cnf as  key_buffer_size=[desired value] , since it is a dynamic variable the changes can be done in runtime."
+     category="Connection Buffers"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="15"
+     name="sort buffer too small"
+     desc="The buffer size required for sorting query results is too small."
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_sort_buffer_size"
+     solution="Increase this value for faster order by or group by operations. Increase sort_buffer_size=[desired value] in the server configuration file, since it is a dynamic variable the changes can be done in runtime as well."
+     category="Connection Buffers"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="16"
+     name="sort buffer too large"
+     desc="The sort buffer is allocated more than the required size , use the resource elsewhere to gain performance"
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_sort_buffer_size"
+     solution="Decrease the value of sort_buffer_size by adding the entry in my.cnf as  sort_buffer_size=[desired value] , since it is a dynamic variable the changes can be done in runtime."
+     category="Connection Buffers"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="17"
+     name="join buffer too small"
+     desc="Join buffer size is set to too small."
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_join_buffer_size"
+     solution="Increase the value to get a faster full join when adding indexes is not possible. Increase the value of join_buffer_size by adding the entry in my.cnf as  join_buffer_size=[desired value] , since it is a dynamic variable the changes can be done in runtime."
+     category="Connection Buffers"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="18"
+     name="join buffer too large"
+     desc="The join buffer size is allocated more than the required size, use the resource elsewhere to gain performance"
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_join_buffer_size"
+     solution="Decrease the value of join_buffer_size by adding the entry in my.cnf as  join_buffer_size=[desired value] , since it is a dynamic variable the changes can be done in runtime."
+     category="Connection Buffers"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="19"
+     name="open_files_limit too small compared to open_files usage ratio"
+     desc="open_files usage is more than the open_files_limit set, you should try increasing the value of open_files_limit if mysqld gives you the Too many open files error."
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-options.html#option_mysqld_open-files-limit"
+     solution="Increasing the value of open_files_limit by adding open-files-limit=[desired value] in my.cnf file , this requires a service restart to take effect. Keep in mind some operating systems have limits to this value. "
+     category="Operating System"
+     level="0"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="20"
+     name="table locks too high"
+     desc="If you encounter more table locks in MySQL, you may try to convert some of your MyISAM tables to InnoDB to avoid this problem."
+     links="http://dev.mysql.com/doc/refman/5.0/en/table-locking.html"
+     solution="Try converting your MyISAM tables which are causing the table locks to InnoDB to avoid this problem. "
+     category="Locking"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="21"
+     name="table cache too small"
+     desc="Increase the table_cache value, increasing this value increases the number of file descriptors that mysqld requires."
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_table_cache"
+     solution="Increase the value of table_cache_size by adding the entry in my.cnf as  table_cache_size=[desired value] , since it is a dynamic variable the changes can be done in runtime."
+     category="Caches"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="22"
+     name="table cache too large"
+     desc="table_cache size is too large. Use the resource elsewhere to gain the performance."
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_table_cache"
+     solution="Decrease the value of table_cache_size by adding the entry in my.cnf as  table_cache_size=[desired value] , since it is a dynamic variable the changes can be done in runtime."
+     category="Caches"
+level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="23"
+     name="thread cache too small"
+     desc="thread_cache size is too small given the number of incoming connections seeking new threads. "
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_thread_cache_size"
+     solution="Increase the value of thread_cache_size by adding the entry in my.cnf as  thread_cache_size=[desired value] , since it is a dynamic variable the changes can be done in runtime."
+     category="Caches"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="24"
+     name="thread cache too large"
+     desc="thread_cache_size is set too large. Resources utilization may suffer."
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_thread_cache_size"
+     solution="The optimal usage of thread cache can be find by checking the difference between Connections and Threads_created status variables.The thread cache size value seems to be high. Decrease the value of thread_cache_size by adding the entry in my.cnf as  thread_cache_size=[desired value] , since it is a dynamic variable the changes can be done in runtime."
+     category="Caches"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="25"
+     name="bin_log_cache size too small"
+     desc="binlog_cache_size is set too small for the size of transactional queries. "
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_binlog_cache_size"
+     solution="Increase the value of binlog_cache_size in the cnf file. This variable can be increased dynamically as well."
+     category="Logging"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="26"
+     name="excessive disk tmp table usage"
+     desc="Temporary table usage on disk is excessive. "
+     links="http://dev.mysql.com/doc/refman/5.1/en/internal-temporary-tables.html
+http://dev.mysql.com/doc/refman/5.0/en/memory-use.html
+http://dev.mysql.com/doc/refman/5.0/en/temporary-files.html"
+     solution="Increase the value of the variable tmp_table_size or add more RAM to allow data/indexes to be stored in RAM."
+     category="Operating System"
+     level="0"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="27"
+     name="flush time not zero value"
+     desc="flush_time variable is set to non-zero value."
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_flush_time"
+     solution="Set the value of flush_time=0 in the server configuration file. "
+     category="Logging"
+     level="2"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="29"
+     name="innodb doublewrite buffer not enabled"
+     desc="Innodb doublewrite buffer is not enabled. This should be enabled for best InnoDB functionality. "
+     links="http://dev.mysql.com/doc/refman/5.0/en/innodb-parameters.html"
+     solution="Remove --skip-innodb_doublewrite from the configuration file."
+     category="Innodb"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="30"
+     name="innodb flush method not properly set"
+     desc="innodb_flush_method not set to O_DIRECT or OS is Windows. "
+     links="http://dev.mysql.com/doc/refman/5.0/en/innodb-parameters.html#option_mysqld_innodb_flush_method"
+     solution="Set innodb_flush_method=O_DIRECT or use MySQL on Linux/Unix/Solaris with this setting to achieve best InnoDB functionality. "
+     category="Innodb"
+     level="2"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="31"
+     name="innodb transaction isolation level not properly set for ACID"
+     desc="InnoDB transaction-isolation is not set to REPEATABLE-READ or SERIALIZABLE. In regard to the SQL:1992 transaction isolation levels, the default InnoDB level is REPEATABLE READ."
+     links="http://dev.mysql.com/doc/refman/5.0/en/innodb-transaction-isolation.html"
+     solution="Set transaction-isolation=REPEATABLE-READ or transaction-isolation=SERIALIZABLE to ensure ACID compliance for transactions. "
+     category="Innodb"
+     level="2"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="32"
+     name="innodb_lock_wait_timeout too high"
+     desc="innodb_lock_wait_timeout too high, over the default of 50 seconds."
+     links="http://dev.mysql.com/doc/refman/5.0/en/innodb-parameters.html#option_mysqld_innodb_lock_wait_timeout"
+     solution="The default value is 50 seconds, to change the value add the entry innodb_lock_wait_timeout=50 in the config file."
+     alert_function="innodb_lock_wait_timeout > 50"
+     category="Innodb"
+     level="2"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="33"
+     name="concurrent insert not set correctly"
+     desc="concurrent_insert not set to the correct value for concurrent inserts on MyISAM tables. "
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#sysvar_concurrent_insert"
+     solution="Set the value for the variable concurrent_insert=[desired value] to allow concurrent inserts into the MyISAM tables."
+     alert_function="concurrent_insert eq 0 or eq OFF"
+     category="Myisam"
+     level="2"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="34"
+     name="query cache not enabled"
+     desc="query_cache_type disabled. Please enable for best performance. "
+     links="http://dev.mysql.com/doc/refman/5.0/en/query-cache-configuration.html
+http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_query_cache_type"
+     solution="enable query cache in cnf file."
+     category="Caches"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="37"
+     name="thread cache not enabled"
+     desc="thread_cache_size=0, please change to the non-zero value"
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_thread_cache_size"
+     solution="Enable this variable by adding the entry thread_cache_size=[value]"
+     category="Caches"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="39"
+     name="binary logs not set to auto-purge"
+     desc="Purging of binary logs is not enabled, this may lead to huge disk usage."
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_expire_logs_days"
+     solution="set expire_logs_days=[desired number of days] in config file for the number of days for automatic binary log removal. "
+     category="Logging"
+     level="0"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="42"
+     name="slave sql thread stopped"
+     desc="Slave_SQL_Running: NO"
+     links="http://dev.mysql.com/doc/refman/5.0/en/show-slave-status.html"
+     solution="Check error log for more information."
+     category="Replication"
+     level="0"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="43"
+     name="slave io thread stopped"
+     desc="Slave_IO_Running: NO"
+     links="http://dev.mysql.com/doc/refman/5.0/en/show-slave-status.html"
+     solution="Check error log for more information."
+     category="Replication"
+     level="0"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="44"
+     name="slave out of sync with master"
+     desc="Seconds_Behind_Master > threshold_seconds_behind_master"
+     links="http://dev.mysql.com/doc/refman/5.0/en/show-slave-status.html"
+     solution="Slave server is lagging behind master server. Troubleshoot network connection, resource usage, and general replication information in the error log. "
+     category="Replication"
+     level="0"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="45"
+     name="slave not set as read-only"
+     desc="read-only not set to when server is configured as slave."
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#option_mysqld_read_only"
+     solution="Enable the read only option by adding the entry 'read_only' in the configuration file."
+     category="Replication"
+     level="0"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="46"
+     name="slave relay logs not automatically purged"
+     desc="relay_log_purge is set to OFF."
+     links="http://dev.mysql.com/doc/refman/5.0/en/replication-options.html
+http://dev.mysql.com/doc/refman/5.0/en/replication-options-slave.html#option_mysqld_relay_log_purge"
+     solution="By default this variable is enabled. To fix this alert set relay_log_purge=1 in the configuration file."
+     category="Replication"
+     level="0"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="47"
+     name="account with remote access has global privs"
+     desc="A remote user has been found with ALL privileges."
+     links="http://dev.mysql.com/doc/refman/5.0/en/privileges.html"
+     solution="Change user account to only allow privileges as needed. Full global privileges is considered a security risk for production servers. "
+     category="Security"
+     level="0"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="48"
+     name="old_passwords enabled"
+     desc="old_passwords is set to ON."
+     links="http://dev.mysql.com/doc/refman/5.0/en/password-hashing.html"
+     solution="Remove the setting 'old_passwords=1' in the configuration file. "
+     category="Security"
+     level="2"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="50"
+     name="account has grant option"
+     desc="User with grant option detected."
+     links="http://dev.mysql.com/doc/refman/5.0/en/grant.html"
+     solution="Remove Grant privilege from user account."
+     category="Security"
+     level="1"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="51"
+     name="root can login remotely"
+     desc="Root user allows to connect remotely. Major security violation."
+     links="http://dev.mysql.com/doc/refman/5.0/en/request-access.html"
+     solution="Remove remote host privilege for roor user."
+     category="Security"
+     level="0"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="52"
+     name="user has no password"
+     desc="User found with blank password."
+     links="http://dev.mysql.com/doc/refman/5.0/en/set-password.html"
+     solution="Set a password for the user. "
+     category="Security"
+     level="0"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="53"
+     name="blank username detected"
+     desc="DB user account with no password is detected , which lead to security violation."
+     links="http://dev.mysql.com/doc/refman/5.0/en/request-access.html"
+     solution="Make sure to delete the blank user and host entries once you complete installing MySQL server."
+     category="Security"
+     level="0"
+     time="2008-06-18 14:43:48"
+     />
+  <event
+     id="56"
+     name="general query log enabled"
+     desc="General query log will log all the transaction into a file , which will cause more disk I/O in the server and more processing resources to be consumed. It also has a tendency to fill up disk space very rapidly. Typically only enabled on a development server or during extensive troubleshooting outside of production use. "
+     links="http://dev.mysql.com/doc/refman/5.0/en/query-log.html
+http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#sysvar_log"
+     solution="Comment out the 'log' directive in the cnf file. It should look like this #log or #log=mysql-gen.log"
+     category="Logging"
+     level="1"
+     time="0000-00-00 00:00:00"
+     />
+  <event
+     id="57"
+     name="warnings not being logged"
+     desc="The warning log variable is set to 0 value; as such no warnings will be logged to the error log. This is not recommended. "
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#sysvar_log_warnings"
+     solution="Enable this variable by adding the entry 'log-warnings' in config file, all warnings will get logged in error log file."
+     category="logging"
+     level="2"
+     time="0000-00-00 00:00:00"
+     />
+  <event
+     id="100"
+     name="max_heap_table_size ratio too small"
+     desc="max_heap_table_size is too small compared to tmp_table_size"
+     links="http://dev.mysql.com/doc/refman/5.0/en/server-system-variables.html#sysvar_max_heap_table_size
+http://dev.mysql.com/doc/refman/5.0/en/internal-temporary-tables.html"
+     solution="Increase the max_heap_table_size so that it is within range of 75% of the tmp_table_size."
+     category="Operating System"
+     level="0"
+     time="2008-12-14 17:07:42"
+     />
+</events>
+
